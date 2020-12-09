@@ -34,13 +34,13 @@ fn main() -> Result<(), std::io::Error> {
 
             colorspec.set_fg(Some(Color::Rgb(rgb.0, rgb.1, rgb.2)));
             stdout.set_color(&colorspec)?;
-            stdout.write(tokens[i].as_bytes())?;
+            stdout.write_all(tokens[i].as_bytes())?;
 
-            if i != tokens.len() - 1 {
-                stdout.write(" ".as_bytes())?;
+            let _ = if i != tokens.len() - 1 {
+                stdout.write(" ".as_bytes())?
             } else {
-                stdout.write("\n".as_bytes())?;
-            }
+                stdout.write("\n".as_bytes())?
+            };
         }
     }
 
